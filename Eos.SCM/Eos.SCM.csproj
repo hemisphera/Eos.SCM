@@ -112,7 +112,6 @@
     <Compile Include="Commands\Base\ScmCmdletBase.cs" />
     <Compile Include="Commands\ChangeSets\UploadChangesetCmdlet.cs" />
     <Compile Include="ConfigurationScope.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="FileDiffBlock.cs" />
     <Compile Include="FileDiff.cs" />
     <Compile Include="Helpers\ArgBuilder.cs" />

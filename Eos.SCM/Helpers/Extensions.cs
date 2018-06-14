@@ -10,6 +10,14 @@ namespace Eos.SCM.Helpers
   internal static class Extensions
   {
 
+    internal static IEnumerable<T> InKeys<T>(this IEnumerable<T> coll, Func<T, string> keySelector, IEnumerable<string> keys)
+    {
+      var keyArray = keys.ToArray();
+      if (!keyArray.Any())
+        return coll;
+      return coll.Where(i => keyArray.Contains(keySelector(i)));
+    }
+
     public static string Enclose(this string inStr, char delimiter)
     {
       return delimiter + inStr + delimiter;
@@ -21,8 +29,7 @@ namespace Eos.SCM.Helpers
       if (withError && !isValid)
         throw new ArgumentNullException(name);
       return isValid;
-    }      
-    
+    }
   }
 
 }
