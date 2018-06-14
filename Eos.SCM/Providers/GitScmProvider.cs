@@ -111,6 +111,7 @@ namespace Eos.SCM
 
     public void CreateRepository(INewRepositoryArgs args)
     {
+      Directory.CreateDirectory(args.RepositoryPath);
       var ab = new ArgBuilder();
       ab.Add("init");
       RunCommand(ab, args.RepositoryPath);
@@ -171,13 +172,17 @@ namespace Eos.SCM
       throw new NotImplementedException();
     }
 
+
     public bool IsError(int exitCode)
     {
-      throw new NotImplementedException();
+      return exitCode != 0;
     }
 
     public string FormatCredentials(ICredentials credentials)
     {
+      if (credentials == null) 
+        return null;
+
       throw new NotImplementedException();
     }
 
@@ -185,6 +190,7 @@ namespace Eos.SCM
     {
       throw new NotImplementedException();
     }
+
   }
 
 }

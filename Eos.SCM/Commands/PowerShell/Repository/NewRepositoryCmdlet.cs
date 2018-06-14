@@ -8,6 +8,13 @@ namespace Eos.SCM
   public class NewRepositoryCmdlet: ScmCmdletBase, INewRepositoryArgs
   {
 
+    [Parameter(Position = 0)]
+    public string Location
+    {
+      get => RepositoryPath;
+      set => RepositoryPath = value;
+    }
+
     protected override void ProcessRecord()
     {
       Provider.CreateRepository(this);

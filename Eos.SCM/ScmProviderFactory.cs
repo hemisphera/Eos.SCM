@@ -21,7 +21,8 @@ namespace Eos.SCM
     {
       Providers = new List<IScmProvider>
       {
-        new HgScmProvider()
+        new HgScmProvider(),
+        new GitScmProvider()
       };
     }
 

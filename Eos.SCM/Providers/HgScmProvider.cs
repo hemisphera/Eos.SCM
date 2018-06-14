@@ -79,6 +79,7 @@ namespace Eos.SCM
 
     public void CreateRepository(INewRepositoryArgs args)
     {
+      Directory.CreateDirectory(args.RepositoryPath);
       var ab = new ArgBuilder();
       ab.Add("init");
       ab.Add(args.RepositoryPath.Enclose('"'));
