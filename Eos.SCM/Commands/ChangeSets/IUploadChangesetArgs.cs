@@ -1,14 +1,16 @@
-﻿namespace Eos.SCM
+﻿using System.Management.Automation;
+
+namespace Eos.SCM
 {
 
   public interface IUploadChangesetArgs : IRemoteScmCommandArgsBase
   {
 
-    bool CheckOnly { get; }
+    SwitchParameter CheckOnly { get; }
 
     string Destination { get; }
 
-    RevisionQuery Query { get; }
+    string TargetRev { get; }
 
   }
 

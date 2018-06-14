@@ -8,7 +8,7 @@ namespace Eos.SCM
   {
 
     [Parameter(Mandatory = true, Position = 0)]
-    public RevisionQuery TargetRevision { get; set; }
+    public string TargetRev { get; set; }
 
     [Parameter]
     public string NewBranchName { get; set; }

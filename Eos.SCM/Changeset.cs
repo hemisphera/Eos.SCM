@@ -34,15 +34,13 @@ namespace Eos.SCM
 
     public string Hash { get; private set; }
 
-    public int Sequence { get; private set; }
+    public int? Sequence { get; private set; }
 
     public DateTime Date { get; private set; }
 
     public string User { get; private set; }
 
     public string Description { get; private set; }
-
-    public string[] Parents { get; private set; }
 
 
     private Changeset(XmlElement element)
@@ -53,28 +51,10 @@ namespace Eos.SCM
     private void Load(XmlElement element)
     {
       Hash = element.GetValue("ID");
+      Sequence = element.GetValueInt("No");
       Date = element.GetValueDate("Date");
       User = element.GetValue("User");
       Description = element.GetValue("Comment");
-      Parents =
-        new []
-        {
-          element.GetValue("Parent1"),
-          element.GetValue("Parent2")
-        }.Where(p => !String.IsNullOrEmpty(p))
-        .ToArray();
-      /*
-      var extrasNodes = element.SelectNodes("Extras/Ex").Cast<XmlElement>();
-      foreach (var extrasNode in extrasNodes)
-      {
-        string[] parts = extrasNode.InnerText.Split("=".ToCharArray(), 2);
-        try
-        {
-          if (parts[0] == "source") GraftSource = parts[1];
-        }
-        catch { }
-      }
-      */
     }
 
     public override int GetHashCode()

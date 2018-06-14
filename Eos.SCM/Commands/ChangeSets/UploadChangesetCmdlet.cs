@@ -8,18 +8,18 @@ namespace Eos.SCM
   {
 
     [Parameter]
-    public bool CheckOnly { get; set; }
+    public SwitchParameter CheckOnly { get; set; }
 
     [Parameter]
     public string Destination { get; set; }
 
     [Parameter]
-    public RevisionQuery Query { get; set; }
+    public string TargetRev { get; set; }
 
 
     protected override void ProcessRecord()
     {
-      Provider.UploadChangesets(this);
+      WriteObject(Provider.UploadChangesets(this), true);
     }
 
   }

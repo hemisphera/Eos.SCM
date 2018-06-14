@@ -19,11 +19,11 @@ namespace Eos.SCM.Helpers
       return subNode == null ? DateTime.MinValue : XmlConvert.ToDateTime(subNode.InnerText, XmlDateTimeSerializationMode.Unspecified);
     }
 
-    public static int GetValueInt(this XmlElement element, string xpath)
+    public static int? GetValueInt(this XmlElement element, string xpath)
     {
       var subNode = element.SelectSingleNode(xpath);
       if (subNode == null)
-        return -1;
+        return null;
       return int.Parse(subNode.InnerText);
     }
 

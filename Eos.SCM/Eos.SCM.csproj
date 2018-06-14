@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Changeset.cs" />
+    <Compile Include="Commands\Base\ConfigItems\GetItemArgs.cs" />
     <Compile Include="Commands\Repository\CloneRepositoryArgs.cs" />
     <Compile Include="Commands\Branch\GetBranchesArgs.cs" />
     <Compile Include="Commands\Base\RemoteScmCommandArgsBase.cs" />

@@ -6,11 +6,9 @@
 
     public bool CheckOnly { get; set; }
 
-    public bool ReturnChangesets { get; set; }
-
     public string Source { get; set; }
 
-    public RevisionQuery Query { get; set; }
+    public string TargetRev { get; set; }
 
   }
 

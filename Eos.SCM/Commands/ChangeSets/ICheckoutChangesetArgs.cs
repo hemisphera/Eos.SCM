@@ -6,7 +6,7 @@
     
     bool Clean { get; }
 
-    RevisionQuery TargetRevision { get; }
+    string TargetRev { get; }
 
     string NewBranchName { get; }
 

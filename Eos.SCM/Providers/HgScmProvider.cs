@@ -18,8 +18,7 @@ namespace Eos.SCM
   {
 
     private const string XmlLogTemplate = 
-      "<Node><ID>{node}</ID><No>{rev}</No><Date>{date|rfc3339date}</Date><User>{author|escape}</User><Comment>{desc|escape}</Comment>" + 
-      "<Parent1>{p1node}</Parent1><Parent2>{p2node}</Parent2></Node>";
+      "<Node><ID>{node}</ID><No>{rev}</No><Date>{date|rfc3339date}</Date><User>{author|escape}</User><Comment>{desc|escape}</Comment></Node>";
 
 
     public string Name => "Mercurial";
@@ -32,13 +31,6 @@ namespace Eos.SCM
       DefaultExeName = "hg.exe";
     }
 
-
-    private static void DisposeTempFile(string filename)
-    {
-      if (String.IsNullOrEmpty(filename) || !File.Exists(filename))
-        return;
-      File.Delete(filename);
-    }
 
     private string GetRepositoryRoot(string folder)
     {
@@ -275,8 +267,8 @@ namespace Eos.SCM
       var ab = new ArgBuilder();
       ab.Add(args.CheckOnly ? "incoming" : "pull");
       ab.Add(args.Source);
-      if (args.Query != null)
-        ab.Add($"--rev {FormatQuery(args.Query)}");
+      if (args.TargetRev != null)
+        ab.Add($"--rev {FormatQuery(args.TargetRev)}");
 
       var r = RunCommand(ab, args);
 
@@ -288,8 +280,8 @@ namespace Eos.SCM
       var ab = new ArgBuilder();
       ab.Add(args.CheckOnly ? "outgoing" : "push");
       ab.Add(args.Destination);
-      if (args.Query != null)
-        ab.Add($"--rev {FormatQuery(args.Query)}");
+      if (args.TargetRev != null)
+        ab.Add($"--rev {FormatQuery(args.TargetRev)}");
 
       var r = RunCommand(ab, args);
 
@@ -302,8 +294,8 @@ namespace Eos.SCM
       ab.Add("update");
       if (args.Clean)
         ab.Add("--clean");
-      if (args.TargetRevision != null)
-        ab.Add(args.TargetRevision.FromRevisionId);
+      if (args.TargetRev != null)
+        ab.Add(args.TargetRev);
       RunCommand(ab, args);
 
       if (!String.IsNullOrEmpty(args.NewBranchName))

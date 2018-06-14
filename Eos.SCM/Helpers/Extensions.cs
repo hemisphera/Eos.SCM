@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,22 @@ namespace Eos.SCM.Helpers
         throw new ArgumentNullException(name);
       return isValid;
     }
+
+    public static bool IsNullOrEmpty(this string str)
+    {
+      return String.IsNullOrEmpty(str);
+    }
+
+    public static string WhenNullOrEmpty(this string str, string replacementStr)
+    {
+      return str.IsNullOrEmpty() ? replacementStr : str;
+    }
+
+    public static string[] ToArray(this string str)
+    {
+      return new[] { str };
+    }
+
   }
 
 }
