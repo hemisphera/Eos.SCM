@@ -1,0 +1,5 @@
+packages/
+*/obj/*
+*/bin/*
+Eos.SCM.Test/
+Eos.SCM.TestSuite/
