@@ -205,7 +205,7 @@ namespace Eos.SCM
         }).ToArray();
     }
 
-    public void Revert(IRevertScmFilesArgs args)
+    public void Revert(IResetScmFilesArgs args)
     {
       var ab = new ArgBuilder();
       ab.Add("revert");

@@ -64,7 +64,7 @@ namespace Eos.SCM
       throw new NotImplementedException();
     }
 
-    public void Revert(IRevertScmFilesArgs args)
+    public void Revert(IResetScmFilesArgs args)
     {
       throw new NotImplementedException();
     }

@@ -4,7 +4,7 @@ namespace Eos.SCM
 {
 
   [Cmdlet(VerbsCommon.Reset, ResourceNames.File)]
-  public class ResetScmFilesCmdlet : ScmCmdletBase, IRevertScmFilesArgs
+  public class ResetScmFilesCmdlet : ScmCmdletBase, IResetScmFilesArgs
   {
 
     [Parameter(Mandatory = true)]

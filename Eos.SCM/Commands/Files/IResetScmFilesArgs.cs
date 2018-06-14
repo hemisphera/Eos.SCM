@@ -1,7 +1,7 @@
 ﻿namespace Eos.SCM
 {
 
-  public interface IRevertScmFilesArgs : IScmCommandArgsBase
+  public interface IResetScmFilesArgs : IScmCommandArgsBase
   {
     
     string[] Files { get; }

@@ -16,7 +16,7 @@ namespace Eos.SCM
 
     ScmFile[] GetFiles(IGetScmFileArgs args);
 
-    void Revert(IRevertScmFilesArgs args);
+    void Revert(IResetScmFilesArgs args);
 
     void RenameScmFile(IRenameScmFileArgs args);
 
