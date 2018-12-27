@@ -24,6 +24,8 @@ namespace Eos.SCM
     public string Name => "Mercurial";
 
     public string UserConfigFilename => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "mercurial.ini");
+    
+    public bool IsInstalled { get; }
 
 
     public HgScmProvider()
@@ -32,11 +34,11 @@ namespace Eos.SCM
     }
 
 
-    private string GetRepositoryRoot(string folder)
+    public string GetRepositoryRoot(string path)
     {
       var ab = new ArgBuilder();
       ab.Add("root");
-      return RunCommand(ab, null, folder).LastOrDefault();
+      return RunCommand(ab, null, path).LastOrDefault();
     }
 
     private string GetRepositoryStore(string folder)
@@ -99,7 +101,7 @@ namespace Eos.SCM
           Url = e.Value
         });
 
-      remotes = remotes.Where(e => args.Key.Contains(e.Name));
+      remotes = remotes.Where(e => args.Key == null || args.Key.Contains(e.Name));
       return remotes.ToArray();
     }
 
@@ -124,7 +126,7 @@ namespace Eos.SCM
       SaveIniFile(hgrcFilename, iniData);
     }
 
-    public void Commit(ICommitScmFileArgs args)
+    public Changeset Commit(ICommitScmFileArgs args)
     {
       var ab = new ArgBuilder();
       TempFile fileList = null;
@@ -151,6 +153,13 @@ namespace Eos.SCM
       {
         fileList?.Dispose();
       }
+
+      return null; // todo
+    }
+
+    public string[] Merge(IMergeArgs args)
+    {
+      throw new NotImplementedException();
     }
 
     public ScmFile[] GetFiles(IGetScmFileArgs args)
@@ -243,7 +252,7 @@ namespace Eos.SCM
       }
     }
 
-    public Changeset[] GetChangesets(IGetChangesetArgs args)
+    public Changeset[] GetChangesets(IGetChangesetsArgs args)
     {
       var ab = new ArgBuilder();
       if (args.Current)
@@ -484,6 +493,8 @@ namespace Eos.SCM
 
     public string FormatCredentials(ICredentials credentials)
     {
+      if (credentials == null) return "";
+
       var c = credentials.GetCredential(new Uri("http://localhost"), "Basic");
       var b = new StringBuilder();
       var cfg = "--config \"auth.scm.{0}={1}\" ";

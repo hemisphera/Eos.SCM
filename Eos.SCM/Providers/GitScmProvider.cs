@@ -20,6 +20,7 @@ namespace Eos.SCM
     public string Name => "Git";
 
     public string UserConfigFilename => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".gitconfig");
+    public bool IsInstalled { get; }
 
 
     public GitScmProvider()
@@ -37,7 +38,7 @@ namespace Eos.SCM
       return remotes.FirstOrDefault();
     }
     
-    private string GetRepositoryRoot(string folder)
+    public string GetRepositoryRoot(string folder)
     {
       var ab = new ArgBuilder();
       ab.Add("rev-parse");
@@ -66,7 +67,7 @@ namespace Eos.SCM
     }
 
 
-    public void Commit(ICommitScmFileArgs args)
+    public Changeset Commit(ICommitScmFileArgs args)
     {
       Reset(args.RepositoryPath);
 
@@ -85,6 +86,13 @@ namespace Eos.SCM
         ab.Add($"--file=\"{msgFile}\"");
         RunCommand(ab, args);
       }
+
+      return null; // todo
+    }
+
+    public string[] Merge(IMergeArgs args)
+    {
+      throw new NotImplementedException();
     }
 
     public ScmFile[] GetFiles(IGetScmFileArgs args)
@@ -110,7 +118,7 @@ namespace Eos.SCM
       ab.Add(args.TargetRev);
       RunCommand(ab, args);
 
-      return GetChangesets(new GetChangesetArgs
+      return GetChangesets(new GetChangesetsArgs
       {
         RepositoryPath = args.RepositoryPath,
         Query = "..@{u}"
@@ -134,7 +142,7 @@ namespace Eos.SCM
       };
 
       var changeSets =
-        GetChangesets(new GetChangesetArgs
+        GetChangesets(new GetChangesetsArgs
         {
           RepositoryPath = args.RepositoryPath,
           Query = query
@@ -156,7 +164,7 @@ namespace Eos.SCM
       throw new NotImplementedException();
     }
 
-    public Changeset[] GetChangesets(IGetChangesetArgs args)
+    public Changeset[] GetChangesets(IGetChangesetsArgs args)
     {
       var ab = new ArgBuilder();
       ab.Add("log");

@@ -18,6 +18,23 @@ namespace Eos.SCM.Helpers
         msg.AppendLine(message);
       throw new NotSupportedException(msg.ToString());
     }
+    
+
+    public static Changeset GetCurrentChangeset(this IScmProvider provider)
+    {
+      return provider.GetChangesets(new GetChangesetsArgs
+      {
+        Current = true
+      }).LastOrDefault();
+    }
+
+    public static Changeset GetChangeset(this IScmProvider provider, string id)
+    {
+      return provider.GetChangesets(new GetChangesetsArgs
+      {
+        Query = id
+      }).LastOrDefault();
+    }
 
   }
 

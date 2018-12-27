@@ -11,8 +11,15 @@ namespace Eos.SCM
 
     string UserConfigFilename { get; }
 
+    bool IsInstalled { get; }
 
-    void Commit(ICommitScmFileArgs args);
+
+    string GetRepositoryRoot(string path);
+
+
+    Changeset Commit(ICommitScmFileArgs args);
+
+    string[] Merge(IMergeArgs args);
 
     ScmFile[] GetFiles(IGetScmFileArgs args);
 
@@ -27,7 +34,7 @@ namespace Eos.SCM
 
     FileDiff[] GetDiff(IGetDiffArgs args);
 
-    Changeset[] GetChangesets(IGetChangesetArgs args);
+    Changeset[] GetChangesets(IGetChangesetsArgs args);
 
     void CheckoutChangeset(ICheckoutChangesetArgs args);
 

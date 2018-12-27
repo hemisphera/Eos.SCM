@@ -3,7 +3,7 @@
 namespace Eos.SCM
 {
 
-  public interface IGetChangesetArgs : IScmCommandArgsBase
+  public interface IGetChangesetsArgs : IScmCommandArgsBase
   {
 
     RevisionQuery Query { get; }

@@ -3,7 +3,7 @@
 namespace Eos.SCM
 {
 
-  public class GetChangesetArgs : ScmCommandArgsBase, IGetChangesetArgs
+  public class GetChangesetsArgs : ScmCommandArgsBase, IGetChangesetsArgs
   {
 
     public RevisionQuery Query { get; set; }

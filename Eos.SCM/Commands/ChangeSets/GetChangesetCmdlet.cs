@@ -4,7 +4,7 @@ namespace Eos.SCM
 {
 
   [Cmdlet(VerbsCommon.Get, ResourceNames.ChangeSet)]
-  public class GetChangesetCmdlet : ScmCmdletBase, IGetChangesetArgs
+  public class GetChangesetsCmdlet : ScmCmdletBase, IGetChangesetsArgs
   {
 
     [Parameter]

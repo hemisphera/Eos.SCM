@@ -57,6 +57,12 @@ namespace Eos.SCM
       Description = element.GetValue("Comment");
     }
 
+
+    public ScmFile[] GetFiles(Repository repository)
+    {
+      return repository.GetFiles(Hash);
+    }
+
     public override int GetHashCode()
     {
       // ReSharper disable once NonReadonlyMemberInGetHashCode
@@ -79,6 +85,7 @@ namespace Eos.SCM
       var str = Sequence >= 0 ? "{0}:{1}" : "{1}";
       return String.Format(str, Sequence, Hash);
     }
+
   }
 
 }
